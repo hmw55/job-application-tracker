@@ -1,0 +1,20 @@
+# Python virtual environments
+venv/ 
+
+# Python cache files
+__pycache__/
+*,pyc
+
+# SQLite database files
+*.db
+
+# Environment variables
+.env
+
+# Frontend dependencies and builds
+node_modules/
+dist/
+build/
+
+# OS / editor files
+.DS_Store
