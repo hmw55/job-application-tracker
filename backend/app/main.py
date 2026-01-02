@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from .database import SessionLocal, engine
+from .database import SessionLocal, engine, get_db
 from . import models, crud, schemas
 
 models.Base.metadata.create_all(bind=engine)
@@ -46,4 +46,33 @@ def delete_company(company_id: int, db: Session = Depends(get_db)):
     deleted = crud.delete_company(db, company_id)
     if deleted is None:
         raise HTTPException(status_code=404, detail="Company not found")
+    return deleted
+
+
+# --- Jobs CRUD ---
+@app.get("/api/jobs", response_model=list[schemas.Job])
+def read_jobs(db: Session = Depends(get_db)):
+    return crud.get_jobs(db)
+
+@app.get("/api/jobs/{job_id}", response_model=schemas.Job)
+def read_job(job_id: int, db: Session = Depends(get_db)):
+    job = crud.get_job(db, job_id)
+    return job
+
+@app.post("/api/jobs", response_model=schemas.Job)
+def create_job(job: schemas.JobCreate, db: Session = Depends(get_db)):
+    return crud.create_job(db, job)
+
+@app.put("/api/jobs/{job_id}", response_model=schemas.Job)
+def update_job(job_id: int, job: schemas.JobCreate, db: Session = Depends(get_db)):
+    updated = crud.update_job(db, job_id, job)
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Job not found")
+    return updated
+
+@app.delete("/api/jobs/{job_id}", response_model=schemas.Job)
+def delete_job(job_id: int, db: Session = Depends(get_db)):
+    deleted = crud.delete_job(db, job_id)
+    if deleted is None:
+        raise HTTPException(status_code=404, details="Job not found")
     return deleted

@@ -1,6 +1,10 @@
+from fastapi import HTTPException, Depends
 from sqlalchemy.orm import Session
 from . import models, schemas
+from datetime import datetime
+from .database import get_db
 
+# --- Companies CRUD ---
 def get_companies(db:Session):
     return db.query(models.Company).all()
 
@@ -34,3 +38,63 @@ def delete_company(db: Session, company_id: int):
         db.delete(db_company)
         db.commit()
     return db_company
+
+# --- Jobs CRUD ---
+def get_jobs(db: Session):
+    # Get all jobs
+    return db.query(models.Job).all()
+
+def get_job(db: Session, job_id: int):
+    # Get a single job by ID
+    job = db.query(models.Job).filter(models.Job.id == job_id).first()
+    if not job: 
+        raise HTTPException(status_code=404, detail="Job not found")
+    return job
+
+def create_job(db: Session, job: schemas.JobCreate):
+    # Create a job entry
+    # Make sure company exists
+    db_company = db.query(models.Company).filter(models.Company.id == job.company_id).first()
+    if not db_company:
+        raise HTTPException(status_code=400, detail="Company not found")
+
+    db_job = models.Job(
+        company_id=job.company_id,
+        title=job.title,
+        status=job.status,
+        applied_date=job.applied_date,
+        last_updated=job.last_updated,
+        notes=job.notes
+    )
+
+    db.add(db_job)
+    db.commit()
+    db.refresh(db_job)
+    return db_job
+
+def update_job(db: Session, job_id: int, job: schemas.JobCreate):
+    # Update and existing job
+    db_job = db.query(models.Job).filter(models.Job.id == job_id).first()
+    if not db_job:
+        raise HTTPException(status_code=404, detail="Job not found")
+
+    # Update fields
+    db_job.company_id = job.company_id
+    db_job.title = job.title
+    db_job.status = job.status
+    db_job.applied_date = job.applied_date
+    db_job.last_updated = job.last_updated
+    db_job.notes = job.notes
+
+    db.commit()
+    db.refresh(db_job)
+    return db_job
+
+def delete_job(db: Session, job_id: int):
+    # Delete a job by ID
+    db_job = db.query(models.Job).filter(models.Job.id == job_id).first()
+    if not db_job:
+        raise HTTPException(status_code=404, detail="Job not found")
+    db.delete(db_job)
+    db.commit()
+    return db_job
