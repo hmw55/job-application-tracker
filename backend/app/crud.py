@@ -62,6 +62,9 @@ def create_job(db: Session, job: schemas.JobCreate):
         company_id=job.company_id,
         title=job.title,
         status=job.status,
+        job_type=job.job_type,
+        compensation_type=job.compensation_type,
+        compensation_amount=job.compensation_amount,
         applied_date=job.applied_date,
         last_updated=job.last_updated,
         notes=job.notes
@@ -78,13 +81,8 @@ def update_job(db: Session, job_id: int, job: schemas.JobCreate):
     if not db_job:
         raise HTTPException(status_code=404, detail="Job not found")
 
-    # Update fields
-    db_job.company_id = job.company_id
-    db_job.title = job.title
-    db_job.status = job.status
-    db_job.applied_date = job.applied_date
-    db_job.last_updated = job.last_updated
-    db_job.notes = job.notes
+    for field, value in job.dict(exclude_unset=True).items():
+        setattr(db_job, field, value)
 
     db.commit()
     db.refresh(db_job)

@@ -7,7 +7,6 @@ from . import models, crud, schemas
 from fastapi.middleware.cors import CORSMiddleware
 
 
-
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -77,10 +76,7 @@ def create_job(job: schemas.JobCreate, db: Session = Depends(get_db)):
 
 @app.put("/api/jobs/{job_id}", response_model=schemas.Job)
 def update_job(job_id: int, job: schemas.JobCreate, db: Session = Depends(get_db)):
-    updated = crud.update_job(db, job_id, job)
-    if updated is None:
-        raise HTTPException(status_code=404, detail="Job not found")
-    return updated
+    return crud.update_job(db, job_id, job)
 
 @app.delete("/api/jobs/{job_id}", response_model=schemas.Job)
 def delete_job(job_id: int, db: Session = Depends(get_db)):

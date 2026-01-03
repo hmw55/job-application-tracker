@@ -106,7 +106,7 @@ def test_update_job(test_client):
     update_data = {
         "company_id": company_id,
         "title": "NewTitle",
-        "status": "Interviewing",
+        "status": "interview",
         "applied_date": "2026-01-02",
         "last_updated": "2026-01-03",
         "notes": "Updated notes"

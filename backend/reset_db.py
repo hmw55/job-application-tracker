@@ -1,4 +1,5 @@
 from app.database import Base, engine
+from app import models
 
 # WARNING: This will delete all data
 Base.metadata.drop_all(bind=engine)
