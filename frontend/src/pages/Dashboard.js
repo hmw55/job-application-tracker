@@ -74,7 +74,7 @@ const Dashboard = () => {
         <div className="dashboard">
             {/* Header */}
             <header className="dashboard-header">
-                <h1>Job Application Tracker</h1>
+                <h1>Job/Internship Application Tracker</h1>
                 <button
                     className="theme-toggle"
                     onClick={() => setDarkMode(!darkMode)}
