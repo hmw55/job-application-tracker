@@ -52,17 +52,10 @@ const Dashboard = () => {
                     {darkMode ? <Sun size={20} /> : <Moon size={20} />}
                 </button>
             </header>
-
-            {/* Companies Section */}
-            <section className="dashboard-section">
-                <h2>Companies</h2>
-                {/* TODO: Add "Add Company" form here later */}
-                <CompanyList companies={companies} />
-            </section>
-
+         
             {/* Jobs Section */}
             <section className="dashboard-section">
-                <h2>Jobs</h2>
+                <h2>Applications</h2>
                 {/* TODO: Add "Add Jobs" form and dropdowns for status later */}
                 <JobList jobs={jobs} companies={companies} />
             </section>

@@ -96,20 +96,27 @@ body {
 .list-header,
 .list-row {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr 1fr;
-  padding: 10px 15px;
+  grid-template-columns: 
+    80px /* Job ID */
+    2fr /* Role */ 
+    2fr /* Company */
+    1.5fr /* Industry */
+    1.2fr /* Status */
+    120px; /* Actions */
+  padding: 12px 16px;
+  gap: 12px;
   align-items: center;
 }
 
 .list-header {
   font-weight: bold;
-  background-color: var(--header-bg);
-  border-bottom: 1px solid #d0d0d0;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .list-row {
-  background-color: var(--section-bg);
-  border-bottom: 1px solid #d0d0d0;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
   transition: background-color 0.2s ease;
 }
 
@@ -118,11 +125,16 @@ body {
   cursor: pointer;
 }
 
+.list-row:last-child {
+  border-bottom: none;
+}
+
 /* Scrollable container */
 .list-container {
-  max-height: 300px;
-  overflow-y: auto;
-  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
 }
 
 /* ========== Buttons ========== */
@@ -155,6 +167,40 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+}
+
+/* ========== Status Pill ========== */
+.status-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+.status-pill.applied {
+  background-color: #2e3a8c;
+  color: #c7d2fe;
+}
+
+.status-pill.interview {
+  background-color: #065f46;
+  color: #a7f3d0;
+}
+
+.status-pill.offer {
+  background-color: #78350f;
+  color: #fde68a;
+}
+
+.status-pill.rejected {
+  background-color: #7f1d1d;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* ========== Error and Loading ========== */
