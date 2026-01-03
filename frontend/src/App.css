@@ -1,61 +1,8 @@
-/* ========= Global Variables ========= */
-:root {
-  --bg-color: #f4f6f8;
-  --text-color: #333;
-  --section-bg: #fff;
-  --header-bg: #ecf0f1;
-  --row-hover: #e8f1ff;
-  --primary-btn: #3498db;
-  --primary-btn-hover: #2980b9;
-  --pill-status-applied: #3498db;
-  --pill-status-interview: #f39c12;
-  --pill-status-offer: #2ecc71;
-  --pill-status-rejected: #e74c3c;
-  --error-color: #e74c3c;
-  --border-color: #d0d0d0;
-}
-
-/* Dark theme overrides */
-[data-theme="dark"] {
-  --bg-color: #1e1e1e;
-  --text-color: #eee;
-  --section-bg: #2c2c2c;
-  --header-bg: #3a3a3a;
-  --row-hover: #333;
-  --primary-btn: #3498db;
-  --primary-btn-hover: #2980b9;
-  --pill-status-applied: #3498db;
-  --pill-status-interview: #f39c12;
-  --pill-status-offer: #2ecc71;
-  --pill-status-rejected: #e74c3c;
-  --error-color: #e74c3c;
-  --border-color: #444;
-}
-
-/* ========= Reset & Global Styles ========= */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-}
-
-.App {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
 /* ========= Dashboard Header ========= */
 .dashboard-header {
   display: flex;
   align-items: center;
-  justify-content: center; /* h1 centered */
+  justify-content: center;
   position: relative;
   padding: 16px 20px;
   margin-bottom: 30px;
@@ -72,7 +19,7 @@ body {
 
 .theme-toggle {
   position: absolute;
-  left: 20px; /* anchor to left */
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -110,7 +57,7 @@ body {
 
 /* ========= Lists (Spreadsheet-Like) ========= */
 .list-container {
-  overflow-x: auto; /* horizontal scroll on small screens */
+  overflow-x: auto;
   overflow-y: auto;
   border-radius: 8px;
   max-height: 450px;
@@ -175,86 +122,6 @@ body {
 .pill.interview { background-color: var(--pill-status-interview); }
 .pill.offer { background-color: var(--pill-status-offer); }
 .pill.rejected { background-color: var(--pill-status-rejected); }
-
-/* ========= Buttons ========= */
-.button {
-  background-color: var(--primary-btn);
-  color: #fff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease;
-}
-
-.button:hover {
-  background-color: var(--primary-btn-hover);
-}
-
-/* ========= Form Inputs ========= */
-.input, 
-.select {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  margin-right: 10px;
-}
-
-
-/* ========= Error & Loading ========= */
-.error {
-  color: var(--error-color);
-  font-weight: bold;
-  text-align: center;
-}
-
-/* ========= Job Form ========= */
-.job-form {
-  background-color: var(--section-bg);
-  padding: 15px 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  margin-top: 15px;
-}
-
-.job-form label {
-  font-weight: 600;
-  margin-bottom: 4px;
-  display: block;
-  font-size: 0.9rem;
-  color: var(--text-color);
-}
-
-.job-form .form-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.job-form .input,
-.job-form .select {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  flex: 1 1 150px;
-}
-
-.job-form .readonly-input {
-  background-color: #f0f0f0;
-  cursor: not-allowed;
-}
-
-.job-form .button-row {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
-}
-
 
 /* ========= Responsive Adjustments ========= */
 @media (max-width: 768px) {
