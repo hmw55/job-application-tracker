@@ -1,7 +1,14 @@
-export default function CompanyItem({ company }) {
+const CompanyItem = ({ company }) => {
     return (
-        <li>
-            {company.id}: {company.name} ({company.industry})
-        </li>
+        <div className="list-row">
+            <div>{company.id}</div>
+            <div>{company.name}</div>
+            <div>{company.industry}</div>
+            <div>
+                <button className="button">Edit</button>
+            </div>
+        </div>
     );
-}
+};
+
+export default CompanyItem;

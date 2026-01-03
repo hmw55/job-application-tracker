@@ -1,11 +1,20 @@
 import CompanyItem from "./CompanyItem";
 
-export default function CompanyList({ companies } ) {
+const CompanyList = ({ companies }) => {
     return (
-        <ul>
-            {companies.map((c) => (
-                <CompanyItem key={c.id} company={c} />
+        <div className="list-container">
+            <div className="list-header">
+                <div>ID</div>
+                <div>Name</div>
+                <div>Industry</div>
+                <div>Actions</div>
+            </div>
+
+            {companies.map(company => (
+                <CompanyItem key={company.id} company={company} />
             ))}
-        </ul>
+        </div>
     );
-} 
+}; 
+
+export default CompanyList;
