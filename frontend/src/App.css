@@ -1,13 +1,18 @@
-/* ========= Global Variable ========== */
+/* ========= Global Variables ========= */
 :root {
   --bg-color: #f4f6f8;
   --text-color: #333;
   --section-bg: #fff;
   --header-bg: #ecf0f1;
-  --row-hover: #f1f8ff;
+  --row-hover: #e8f1ff;
   --primary-btn: #3498db;
   --primary-btn-hover: #2980b9;
+  --pill-status-applied: #3498db;
+  --pill-status-interview: #f39c12;
+  --pill-status-offer: #2ecc71;
+  --pill-status-rejected: #e74c3c;
   --error-color: #e74c3c;
+  --border-color: #d0d0d0;
 }
 
 /* Dark theme overrides */
@@ -19,13 +24,23 @@
   --row-hover: #333;
   --primary-btn: #3498db;
   --primary-btn-hover: #2980b9;
+  --pill-status-applied: #3498db;
+  --pill-status-interview: #f39c12;
+  --pill-status-offer: #2ecc71;
+  --pill-status-rejected: #e74c3c;
   --error-color: #e74c3c;
+  --border-color: #444;
 }
 
-/* ========== Reset & Global Styles ========== */
-body {
+/* ========= Reset & Global Styles ========= */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: "Segoe UI", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
 }
@@ -36,32 +51,30 @@ body {
   padding: 20px;
 }
 
-/* ========== Dashboard Header ========== */
+/* ========= Dashboard Header ========= */
 .dashboard-header {
-  position: relative;
   display: flex;
   align-items: center;
+  justify-content: center; /* h1 centered */
+  position: relative;
   padding: 16px 20px;
   margin-bottom: 30px;
   background-color: var(--header-bg);
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
 }
 
 .dashboard-header h1 {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
   font-size: 1.8rem;
   font-weight: 600;
-  color: var(--text-color);
-  white-space: nowrap;
+  text-align: center;
 }
 
-/* ========== Theme Toggle Button ========== */
 .theme-toggle {
-  margin-right: auto;
+  position: absolute;
+  left: 20px; /* anchor to left */
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,71 +92,97 @@ body {
 }
 
 .theme-toggle:active {
-  transform: scale(0.95);
+  transform: translateY(-50%) scale(0.95);
 }
 
-/* ========== Dashboard Sections ========== */
+/* ========= Dashboard Sections ========= */
+.dashboard-section {
+  margin-bottom: 30px;
+}
+
 .dashboard-section h2 {
-  margin-top: 0;
   font-size: 1.5rem;
   margin-bottom: 15px;
   color: var(--text-color);
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid var(--border-color);
   padding-bottom: 5px;
 }
 
-/* ========== Lists (Spreadsheet-Like) ========== */
+/* ========= Lists (Spreadsheet-Like) ========= */
+.list-container {
+  overflow-x: auto; /* horizontal scroll on small screens */
+  overflow-y: auto;
+  border-radius: 8px;
+  max-height: 450px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  background-color: var(--section-bg);
+}
+
 .list-header,
 .list-row {
   display: grid;
   grid-template-columns: 
-    80px /* Job ID */
-    2fr /* Role */ 
-    2fr /* Company */
-    1.5fr /* Industry */
-    1.2fr /* Status */
-    120px; /* Actions */
-  padding: 12px 16px;
-  gap: 12px;
+    2fr 1fr 2fr 1fr 2fr 1fr 1fr 1.5fr 2fr 1fr; 
   align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  min-width: 1000px; /* ensures horizontal scroll */
 }
 
 .list-header {
   font-weight: bold;
-  background-color: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .list-row {
-  background-color: var(--background);
-  border-bottom: 1px solid var(--border);
+  background-color: var(--section-bg);
+  border-bottom: 1px solid var(--border-color);
   transition: background-color 0.2s ease;
 }
 
 .list-row:hover {
   background-color: var(--row-hover);
-  cursor: pointer;
 }
 
 .list-row:last-child {
   border-bottom: none;
 }
 
-/* Scrollable container */
-.list-container {
+.list-row div {
+  white-space: nowrap;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
+  text-overflow: ellipsis;
 }
 
-/* ========== Buttons ========== */
+/* ========= Status & Type Pills ========= */
+.pill {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-align: center;
+  min-width: 60px;
+}
+
+.pill.applied { background-color: var(--pill-status-applied); }
+.pill.interview { background-color: var(--pill-status-interview); }
+.pill.offer { background-color: var(--pill-status-offer); }
+.pill.rejected { background-color: var(--pill-status-rejected); }
+
+/* ========= Buttons ========= */
 .button {
   background-color: var(--primary-btn);
   color: #fff;
   border: none;
   padding: 6px 12px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.2s ease;
@@ -153,59 +192,51 @@ body {
   background-color: var(--primary-btn-hover);
 }
 
-/*  ========== Form Inputs (for future CRUD) ========== */
+/* ========= Form Inputs ========= */
 .input, 
 .select {
-  padding: 6px 10px;
+  padding: 6px 12px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 0.9rem;
   margin-right: 10px;
 }
 
+/* Responsive form row */
 .form-row {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 10px;
 }
 
-/* ========== Status Pill ========== */
-.status-pill {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: capitalize;
-  display: inline-block;
-}
-
-.status-pill.applied {
-  background-color: #2e3a8c;
-  color: #c7d2fe;
-}
-
-.status-pill.interview {
-  background-color: #065f46;
-  color: #a7f3d0;
-}
-
-.status-pill.offer {
-  background-color: #78350f;
-  color: #fde68a;
-}
-
-.status-pill.rejected {
-  background-color: #7f1d1d;
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* ========== Error and Loading ========== */
+/* ========= Error & Loading ========= */
 .error {
   color: var(--error-color);
   font-weight: bold;
   text-align: center;
+}
+
+/* ========= Responsive Adjustments ========= */
+@media (max-width: 768px) {
+  .dashboard-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .list-header,
+  .list-row {
+    min-width: 800px;
+    grid-template-columns: 
+      2fr 1fr 2fr 1fr 2fr 1fr 1fr 1fr 2fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .list-header,
+  .list-row {
+    min-width: 700px;
+    grid-template-columns: 
+      2fr 1fr 2fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr;
+    font-size: 0.8rem;
+  }
 }
