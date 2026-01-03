@@ -40,8 +40,8 @@ flowchart LR
 
     User --> Browser
     Browser --> Frontend
-    Frontend -->|REST API (JSON)| Backend
-    Backend -->|Read / Write| Database
+    Frontend -->|"REST API (JSON)"| Backend
+    Backend -->|"Read / Write"| Database
     Database --> Backend
     Backend --> Frontend
 ```
