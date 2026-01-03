@@ -1,14 +1,104 @@
-# Job Application Tracker
+<h1 align="center">🚀 Job/Internship Application Tracker 🚀</h1>
 
-A simple, local-first, full stack web application for tracking job applications, interviews, and offers.
+<p align="center">
+  A full-stack web application for tracking job and internship applications, interviews, and offers
+</p>
 
-This project is being built incrementally to demostrate backend (Python/FastAPI), database (SQLite), and frontend (React) skills.
+<p align="center">
+  This project demonstrates backend (Python/FastAPI), database (SQLite), and frontend (React) skills.
+</p>
 
-## Project Structure
-- <code>backend/</code> - The API and database logic (FastAPI + SQLite)
-- <code>frontend/</code> - UI code (soon to be developed)
-- <code>.gitignore</code> - Files/folders to ignore in Git
-- <code>README.md</code> - This file
+---
+
+## 🌟 Key Features
+- **Track Job and Internship Applications:** Company, role, industry, compensation, application date, last updated, status, type, and notes.
+- **Create & Edit Jobs:** Intuitive modal form for adding and updating applications.
+- **Dynamic Dashboard:** Spreadsheet-style view for easy management.
+- **Theme Toggle:** Light/Dark modes for accessibility.
+- **Responsive Design:** Desktop and mobile friendly.
+
+---
+
+## 🗂 Project Structure
+- `backend/` — The API and database logic (FastAPI + SQLite)
+- `frontend/` — UI code (React)
+- `styles/` — CSS for JobForm (Modal) component
+- `.gitignore` — Files/folders to exclude from version control
+- `README.md` — Project documentation
+
+---
+
+## 🧩 System Architecture (UML)
+
+```mermaid
+flowchart LR
+    User((User))
+    Browser[Web Browser]
+    Frontend[React Frontend]
+    Backend[FastAPI Backend]
+    Database[(SQLite Database)]
+
+    User --> Browser
+    Browser --> Frontend
+    Frontend -->|REST API (JSON)| Backend
+    Backend -->|Read / Write| Database
+    Database --> Backend
+    Backend --> Frontend
+```
+
+## 🗄 Database Scheme (Entity Relationship Diagram)
+
+```mermaid
+erDiagram
+    COMPANY ||--o{ JOB : has
+
+    COMPANY {
+        int id PK
+        string name
+        string industry
+        datetime created_at
+    }
+
+    JOB {
+        int id PK
+        int company_id FK
+        string title
+        string status
+        string job_type
+        string compensation_type
+        float compensation_amount
+        date applied_date
+        datetime last_updated
+        string notes
+    }
+```
+
+## 🛠 Technologies Used
+
+```mermaid
+flowchart TB
+    subgraph Frontend
+        React[React]
+        Axios[Axios]
+        CSS[CSS / Theming]
+    end
+
+    subgraph Backend
+        FastAPI[FastAPI]
+        Pydantic[Pydantic Schemas]
+        SQLAlchemy[SQLAlchemy ORM]
+    end
+
+    subgraph Database
+        SQLite[(SQLite)]
+    end
+
+    React --> Axios
+    Axios --> FastAPI
+    FastAPI --> Pydantic
+    FastAPI --> SQLAlchemy
+    SQLAlchemy --> SQLite
+```
 
 ## Getting Started
 
@@ -17,7 +107,7 @@ This project is being built incrementally to demostrate backend (Python/FastAPI)
 - pip or virtual environment support
 - SQLite (default database)
 
-### Running the Backend
+## Backend Setup
 1. Go to the backend folder:
     ```bash
     cd backend
@@ -47,32 +137,62 @@ This project is being built incrementally to demostrate backend (Python/FastAPI)
     ```bash
     uvicorn app.main:app --reload
     ```
-7. Access the API at http://127/0.0.1:8000
-8. Interactive API docs are available at http://127/0.0.1:8000/docs
+Access API:
+- Base API URL: http://127/0.0.1:8000
+- Swagger docs: http://127/0.0.1:8000/docs
 
-### Testing
-- Run tests using:
+## Frontend Setup
+1. Go to the frontend folder
     ```bash
-    pytest -v
+    cd frontend
     ```
-- Test use an in-memory database, so they are sage to run anytime
+2. Install dependencies:
+    ```bash
+    npm install axios react-router-dom lucide-react # recommended
+    # or
+    yarn add axios react-router-dom lucide-react
+    ```
+3. Start the development server:
+    ```bash
+    npm start # recommended
+    # or
+    yarn start
+- The React app will open in your default browser at http://localhost:3000
+- It communicates with the backend at http://127.0.0.1:8000 by default
 
-### API Endpoints
-#### Companies
+### 🎯 Usage
+- **Dashboard:** View all job applications.
+- **Create New Application:** Click "Create New Application" → fill in modal form.
+- **Edit Job:** Click edit icon in job row → update modal form.
+- **Theme Toggle:** Click sun/moon icon to switch to light/dark mode.
+
+*Notes:* Compensation displays as <code>/yr</code> for salary or <code>/hr</code> for hourly.
+
+## 🔌 API Endpoints
+### Companies
 - <code>GET /api/comanies</code> - Lists all companies
 - <code>GET /api/companies/{id}</code> - Get a single company
 - <code>POST /api/comanies</code> - Create a new company
 - <code>PUT /api/companies/{id}</code> - Update a company
 - <code>DELETE /api/companies/{id}</code> - Delete a company
 
-#### Jobs
+### Jobs
 - <code>GET /api/jobs</code> - List all jobs
 - <code>GET /api/jobs/{id}</code> - Get a single job
 - <code>POST /api/jobs</code> - Create a new job
 - <code>PUT /api/jobs/{id}</code> - Update a job
 - <code>DELETE /api/jobs/{id}</code> - Delete a job
 
-### Notes
+## 🧪 Testing
+- Run tests using:
+    ```bash
+    pytest -v
+    ```
+- Test use an in-memory database, so they are sage to run anytime
+
+### 📝 Notes
 - <code>reset_db.py</code> deletes all existing data.
 - <code>seed_db.py</code> adds example companies and jobs.
 - FastAPI automatically generated interactive documentation at <code>/docs</code>
+
+<center> <p>Made with ❤️ by Mack</p> </center> ```
