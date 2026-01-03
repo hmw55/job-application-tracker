@@ -1,0 +1,168 @@
+/* --- Backdrop --- */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 100;
+}
+.modal-backdrop.visible {
+    opacity: 1;
+}
+
+/* --- Modal Card --- */
+.modal-card {
+    background: linear-gradient(145deg, #fefefe, #f0f3f8);
+    padding: 30px 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 900px;
+    transform: scale(0.9);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    opacity: 0;
+}
+.modal-card.scale-in {
+    transform: scale(1);
+    opacity: 1;
+}
+.modal-card.scale-out {
+    transform: scale(0.9);
+    opacity: 0;
+}
+
+/* --- Form --- */
+.job-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- Title --- */
+.modal-title {
+    margin-bottom: 10px;
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+/* --- Rows --- */
+.form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* --- Input, Select, Textarea --- */
+.input, .select, .textarea {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    flex: 1;
+    min-width: 120px;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0,123,255,0.25);
+}
+
+/* --- Textarea --- */
+.textarea {
+    flex: 1 1 100%;
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* --- Date Inputs --- */
+.date-row {
+    width: 100%;
+    display: flex;
+    gap: 15px;
+}
+.date-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.date-group.compact input {
+    flex: 1;
+    min-width: 120px;
+    font-size: 0.95rem;
+    padding: 8px 10px;
+}
+
+/* --- Notes Row --- */
+.notes-row label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* --- Buttons --- */
+.buttons-row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.button {
+    padding: 12px 25px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+/* --- Submit Button --- */
+.button.submit {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+}
+.button.submit:hover {
+    background: linear-gradient(135deg, #0056b3, #003f7f);
+}
+
+/* --- Cancel Button --- */
+.button.cancel {
+    background: #e0e0e0;
+    color: #333;
+}
+.button.cancel:hover {
+    background: #c0c0c0;
+}
+
+/* --- Error --- */
+.error {
+    color: #d9534f;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* --- Prevent page scroll when modal open --- */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .form-row { 
+        flex-direction: column; 
+    }
+    .input, .select, .textarea { 
+        width: 100%; 
+    }
+    .dates-row {
+        flex-direction: column;
+    }
+}

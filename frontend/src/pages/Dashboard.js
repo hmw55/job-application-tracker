@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getCompanies } from "../api/companies";
 import { getJobs } from "../api/jobs";
 import JobForm from "../components/Job/JobForm";
-import CompanyList from "../components/Company/CompanyList";
 import JobList from "../components/Job/JobList";
 import { Sun, Moon } from "lucide-react";
 import "../App.css";
@@ -13,38 +12,57 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
-    const [showForm, setShowForm] = useState(false);
 
-    // Fetch data from backend
+    const [showForm, setShowForm] = useState(false);
+    const [editingJob, setEditingJob] = useState(null);
+
+    // Fetch companies and jobs on mount
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const companiesData = await getCompanies();
-                const jobsData = await getJobs();
+                const [companiesData, jobsData] = await Promise.all([getCompanies(), getJobs()]);
                 setCompanies(companiesData);
                 setJobs(jobsData);
-                setLoading(false);
             } catch (err) {
-                setError(err.message);
+                setError(err.message || "Failed to fetch data");
+            } finally {
                 setLoading(false);
             }
         };
 
-            fetchData();  
+        fetchData();
     }, []);
 
-    const handleFormSuccess = async () => {
+    // Refresh jobs after creating/updating
+    const refreshJobs = async () => {
         try {
             const jobsData = await getJobs();
             setJobs(jobsData);
-            setShowForm(false); // close form after success
         } catch (err) {
             setError(err.message || "Failed to refresh jobs");
         }
     };
 
+    // Open form for creating a new job
+    const handleCreateJob = () => {
+        setEditingJob(null);
+        setShowForm(true);
+    };
 
-    // Apply Theme
+    // Open form for editing a job
+    const handleEditJob = (job) => {
+        setEditingJob(job);
+        setShowForm(true);
+    };
+
+    // Handle form success
+    const handleFormSuccess = async () => {
+        await refreshJobs();
+        setShowForm(false);
+        setEditingJob(null);
+    };
+
+    // Toggle dark/light mode
     useEffect(() => {
         document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
     }, [darkMode]);
@@ -57,7 +75,6 @@ const Dashboard = () => {
             {/* Header */}
             <header className="dashboard-header">
                 <h1>Job Application Tracker</h1>
-
                 <button
                     className="theme-toggle"
                     onClick={() => setDarkMode(!darkMode)}
@@ -66,25 +83,41 @@ const Dashboard = () => {
                     {darkMode ? <Sun size={20} /> : <Moon size={20} />}
                 </button>
             </header>
-         
+
             {/* Jobs Section */}
             <section className="dashboard-section">
                 <div className="section-header">
                     <h2>Applications</h2>
-                    <button className="button" onClick={() => setShowForm(!showForm)}>
-                        {showForm ? "Close Form" : "Create New Application"}
-                    </button>                    
+                    <button className="button" onClick={handleCreateJob}>
+                        Create New Application
+                    </button>
                 </div>
 
                 {showForm && (
                     <JobForm
+                        job={editingJob}
                         companies={companies}
                         onSuccess={handleFormSuccess}
-                        onCancel={() => setShowForm(false)}
+                        onCancel={() => {
+                            setShowForm(false);
+                            setEditingJob(null);
+                        }}
                     />
                 )}
 
-                <JobList jobs={jobs} companies={companies} />
+                <JobList
+                    jobs={jobs}
+                    companies={companies}
+                    onEdit={handleEditJob}
+                    onDelete={async (jobId) => {
+                        try {
+                            await fetch(`http://127.0.0.1:8000/api/jobs/${jobId}`, { method: "DELETE" });
+                            await refreshJobs();
+                        } catch (err) {
+                            setError(err.message || "Failed to delete job");
+                        }
+                    }}
+                />
             </section>
         </div>
     );

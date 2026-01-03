@@ -202,13 +202,6 @@ body {
   margin-right: 10px;
 }
 
-/* Responsive form row */
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 10px;
-}
 
 /* ========= Error & Loading ========= */
 .error {
