@@ -16,7 +16,7 @@
 
 /* --- Modal Card --- */
 .modal-card {
-    background: linear-gradient(145deg, #fefefe, #f0f3f8);
+    background-color: var(--section-bg);
     padding: 30px 35px;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.1);
@@ -25,6 +25,7 @@
     transform: scale(0.9);
     transition: transform 0.2s ease, opacity 0.2s ease;
     font-family: 'Inter', sans-serif;
+    color: var(--text-color);
     opacity: 0;
 }
 .modal-card.scale-in {
@@ -48,7 +49,7 @@
     margin-bottom: 10px;
     font-size: 1.7rem;
     font-weight: 600;
-    color: #333;
+    color: var(--text-color);
     text-align: center;
 }
 
@@ -59,21 +60,30 @@
     flex-wrap: wrap;
 }
 
+/* --- Labels --- */
+label {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
 /* --- Input, Select, Textarea --- */
 .input, .select, .textarea {
     padding: 10px 14px;
     border-radius: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     font-size: 1rem;
     flex: 1;
     min-width: 120px;
-    transition: border 0.2s, box-shadow 0.2s;
+    background-color: var(--section-bg);
+    color: var(--text-color);
+    transition: border 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .input:focus, .select:focus, .textarea:focus {
     outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 6px rgba(0,123,255,0.25);
+    border-color: var(--primary-btn);
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.25);
 }
 
 /* --- Textarea --- */
@@ -101,12 +111,6 @@
     padding: 8px 10px;
 }
 
-/* --- Notes Row --- */
-.notes-row label {
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
 /* --- Buttons --- */
 .buttons-row {
     display: flex;
@@ -126,25 +130,25 @@
 
 /* --- Submit Button --- */
 .button.submit {
-    background: linear-gradient(135deg, #007bff, #0056b3);
+    background: var(--primary-btn);
     color: #fff;
 }
 .button.submit:hover {
-    background: linear-gradient(135deg, #0056b3, #003f7f);
+    background: var(--primary-btn-hover);
 }
 
 /* --- Cancel Button --- */
 .button.cancel {
-    background: #e0e0e0;
-    color: #333;
+    background-color: var(--header-bg);
+    color: var(--text-color);
 }
 .button.cancel:hover {
-    background: #c0c0c0;
+    background-color: var(--row-hover);
 }
 
 /* --- Error --- */
 .error {
-    color: #d9534f;
+    color: var(--error-color);
     font-weight: 500;
     text-align: center;
 }

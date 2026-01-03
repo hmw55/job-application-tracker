@@ -82,7 +82,7 @@ const JobForm = ({ job = null, onSuccess, onCancel }) => {
         <div className={`modal-backdrop ${isVisible ? "visible" : ""}`} onClick={handleBackdropClick}>
             <div className={`modal-card ${isVisible ? "scale-in" : "scale-out"}`}>
                 <form className="job-form" onSubmit={handleSubmit}>
-                    <h2 className="modal-title">{job ? "Edit Job" : "Add New Job"}</h2>
+                    <h2 className="modal-title">{job ? "Edit Application" : "Add New Application"}</h2>
                     {error && <div className="error">{error}</div>}
 
                     {/* Row 1: Company + Industry + Title */}
@@ -154,5 +154,3 @@ const JobForm = ({ job = null, onSuccess, onCancel }) => {
 };
 
 export default JobForm;
-
-// TODO: FIX MODAL ON DARK MODE
