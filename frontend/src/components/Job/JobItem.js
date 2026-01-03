@@ -1,38 +1,36 @@
 import React from "react";
 
-const JobItem = ({ job, company, onEdit, onDelete }) => {
-    // Choose pill color based on status
-    const statusClass = job.status ? job.status.toLowerCase() : "";
+const formatDate = (dateStr) => {
+    if (!dateStr) return "—";
+    const date = new Date(dateStr);
+    if (isNaN(date)) return "—";
+    return `${(date.getMonth()+1).toString().padStart(2,"0")}/${date.getDate().toString().padStart(2,"0")}/${date.getFullYear().toString().slice(2)}`;
+};
+
+const JobItem = ({ job, company, onEdit }) => {
+    const statusClass = job.status ? job.status.toLowerCase() : "saved";
     const typeClass = job.job_type ? job.job_type.toLowerCase() : "";
 
-    const compensation =
-        job.compensation_amount
-            ? job.compensation_type === "hourly"
-                ? `$${job.compensation_amount}/hr`
-                : `$${job.compensation_amount}`
-            : "-";
+    // Updated pay formatting
+    const pay = job.compensation_amount
+        ? job.compensation_type === "hourly"
+            ? `$${job.compensation_amount.toLocaleString()}/hr`
+            : `$${job.compensation_amount.toLocaleString()}/yr`
+        : "—";
 
     return (
         <div className="list-row">
             <div>{company?.name || "—"}</div>
-            <div>{company?.id || "—"}</div>
             <div>{company?.industry || "—"}</div>
-            <div>{job.id}</div>
-            <div>{job.title}</div>
-            <div><span className={`pill ${job.status}`}>{job.status}</span></div>
-            <div>{job.job_type ? job.job_type.replace("_", " ") : "—"}</div>
+            <div>{job.title || "—"}</div>
+            <div className="pay-cell" title={pay}>{pay}</div>
+            <div>{formatDate(job.applied_date)}</div>
+            <div>{formatDate(job.last_updated)}</div>
+            <div><span className={`pill ${statusClass}`}>{job.status || "Saved"}</span></div>
+            <div><span className={`pill type-pill ${typeClass}`}>{job.job_type ? job.job_type.replace("_", " ") : "—"}</span></div>
+            <div className="notes-cell" title={job.notes}>{job.notes || "—"}</div>
             <div>
-            {job.compensation_type && job.compensation_amount
-                ? job.compensation_type === "salary"
-                ? `$${job.compensation_amount.toLocaleString()}/yr`
-                : `$${job.compensation_amount.toLocaleString()}/hr`
-                : "—"}
-            </div>
-            <div>{job.notes || "—"}</div>
-            <div>{job.applied_date || "—"}</div>
-            <div>{job.last_updated || "—"}</div>
-            <div>
-            <button className="button" onClick={() => onEdit(job)}>Edit</button>
+                <button className="button edit-btn" onClick={() => onEdit(job)}>Edit</button>
             </div>
         </div>
     );

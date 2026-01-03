@@ -6,16 +6,14 @@ const JobList = ({ jobs, onEdit, onDelete }) => {
         <div className="list-container">
             <div className="list-header">
                 <div>Company</div>
-                <div>Company ID</div>
                 <div>Industry</div>
-                <div>Job ID</div>
                 <div>Role</div>
+                <div>Pay</div>
+                <div>Applied</div>
+                <div>Updated</div>
                 <div>Status</div>
                 <div>Type</div>
-                <div>Compensation</div>
                 <div>Notes</div>
-                <div>Applied Date</div>
-                <div>Last Updated</div>
                 <div>Actions</div>
             </div>
 
@@ -23,7 +21,7 @@ const JobList = ({ jobs, onEdit, onDelete }) => {
                 <JobItem
                     key={job.id}
                     job={job}
-                    company={job.company} // now directly nested
+                    company={job.company}
                     onEdit={onEdit}
                     onDelete={onDelete}
                 />

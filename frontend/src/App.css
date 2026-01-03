@@ -1,10 +1,18 @@
+/* ========= Dashboard Container ========= */
+.dashboard {
+  width: 100%;
+  max-width: 1400px; /* wider dashboard */
+  margin: 0 auto;
+  padding: 0 20px; /* small gaps on sides */
+}
+
 /* ========= Dashboard Header ========= */
 .dashboard-header {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 16px 20px;
+  padding: 16px 30px; /* slightly wider padding */
   margin-bottom: 30px;
   background-color: var(--header-bg);
   border-radius: 12px;
@@ -12,7 +20,7 @@
 }
 
 .dashboard-header h1 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 600;
   text-align: center;
 }
@@ -45,14 +53,7 @@
 /* ========= Dashboard Sections ========= */
 .dashboard-section {
   margin-bottom: 30px;
-}
-
-.dashboard-section h2 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: var(--text-color);
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 5px;
+  padding: 0 15px; /* small padding so sections are wider */
 }
 
 .section-header {
@@ -60,11 +61,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .section-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 600;
   margin: 0;
   padding-bottom: 5px;
@@ -74,10 +75,10 @@
 }
 
 .section-header button {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   position: absolute;
   right: 0;
-  top: 0;
+  top: -5px;
   padding: 6px 14px;
   border-radius: 8px;
 }
@@ -85,35 +86,44 @@
 /* ========= Lists (Spreadsheet-Like) ========= */
 .list-container {
   overflow-x: auto;
-  overflow-y: auto;
   border-radius: 8px;
-  max-height: 450px;
+  max-height: 500px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   background-color: var(--section-bg);
+  padding: 10px 0;
 }
 
 .list-header,
 .list-row {
   display: grid;
-  grid-template-columns: 
-    2fr 1fr 1.5fr 1fr 2fr 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
+  /* Company | Industry | Role | Pay | Applied | Updated | Status | Type | Notes | Actions */
+  grid-template-columns:
+    2fr 1.2fr 1.8fr 1.2fr 1fr 1fr 1fr 1fr 2fr 0.8fr;
   align-items: center;
   gap: 10px;
   padding: 10px 15px;
-  min-width: 1200px;
+  min-width: 100%; 
 }
 
+.list-header div,
+.list-row div {
+  text-align: center;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========= Header Styling ========= */
 .list-header {
-  font-weight: bold;
+  font-weight: 600;
   background-color: var(--header-bg);
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 2;
+  border-bottom: 2px solid var(--border-color);
+  cursor: pointer;
 }
 
+/* ========= Rows ========= */
 .list-row {
-  background-color: var(--section-bg);
   border-bottom: 1px solid var(--border-color);
   transition: background-color 0.2s ease;
 }
@@ -126,41 +136,84 @@
   border-bottom: none;
 }
 
-.list-row div {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 /* ========= Status & Type Pills ========= */
 .pill {
   display: inline-block;
-  padding: 4px 10px;
+  padding: 4px 8px;
   border-radius: 12px;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: capitalize;
+  min-width: 50px;
   text-align: center;
-  min-width: 60px;
 }
 
+.pill.saved { background-color: gray; }
 .pill.applied { background-color: var(--pill-status-applied); }
 .pill.interview { background-color: var(--pill-status-interview); }
 .pill.offer { background-color: var(--pill-status-offer); }
 .pill.rejected { background-color: var(--pill-status-rejected); }
+.pill.withdrawn { background-color: #888; }
+
+/* Type pills */
+.type-pill {
+  background-color: #555;
+  text-transform: uppercase;
+}
+
+.type-pill.full_time { background-color: #3498db; }    
+.type-pill.part_time { background-color: #f39c12; }    
+.type-pill.contract { background-color: #2ecc71; }     
+.type-pill.internship { background-color: #9b59b6; }   
+.type-pill.temp { background-color: #e74c3c; }         
+
+/* ========= Notes & Pay Tooltip ========= */
+.notes-cell,
+.pay-cell {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  position: relative;
+}
+
+.notes-cell:hover::after,
+.pay-cell:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  white-space: normal;
+  background: var(--section-bg);
+  padding: 6px 10px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  z-index: 10;
+  width: max-content;
+  max-width: 400px;
+}
+
+/* ========= Edit Button ========= */
+.edit-btn {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
 
 /* ========= Responsive Adjustments ========= */
-@media (max-width: 768px) {
-  .dashboard-header h1 {
-    font-size: 1.4rem;
-  }
-
+@media (max-width: 1024px) {
   .list-header,
   .list-row {
-    min-width: 800px;
-    grid-template-columns: 
-      2fr 1fr 2fr 1fr 2fr 1fr 1fr 1fr 2fr 1fr;
+    grid-template-columns:
+      2fr 1.5fr 2fr 1.2fr 1fr 1fr 1fr 1.2fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-header h1 {
+    font-size: 1.5rem;
   }
 }
 
@@ -180,9 +233,8 @@
 @media (max-width: 480px) {
   .list-header,
   .list-row {
-    min-width: 700px;
-    grid-template-columns: 
-      2fr 1fr 2fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr;
     font-size: 0.8rem;
+    grid-template-columns:
+      2fr 1.2fr 1.8fr 1.2fr 1fr 1fr 1fr 1fr 1fr;
   }
 }
