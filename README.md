@@ -148,9 +148,9 @@ Access API:
     ```
 2. Install dependencies:
     ```bash
-    npm install axios react-router-dom lucide-react # recommended
+    npm install # recommended
     # or
-    yarn add axios react-router-dom lucide-react
+    yarn 
     ```
 3. Start the development server:
     ```bash
@@ -166,33 +166,33 @@ Access API:
 - **Edit Job:** Click edit icon in job row → update modal form.
 - **Theme Toggle:** Click sun/moon icon to switch to light/dark mode.
 
-*Notes:* Compensation displays as <code>/yr</code> for salary or <code>/hr</code> for hourly.
+*Notes:* Compensation displays as `/yr` for salary or `/hr` for hourly.
 
 ## 🔌 API Endpoints
 ### Companies
-- <code>GET /api/comanies</code> - Lists all companies
-- <code>GET /api/companies/{id}</code> - Get a single company
-- <code>POST /api/comanies</code> - Create a new company
-- <code>PUT /api/companies/{id}</code> - Update a company
-- <code>DELETE /api/companies/{id}</code> - Delete a company
+- `GET /api/companies` - Lists all companies
+- `GET /api/companies/{id}` - Get a single company
+- `POST /api/companies` - Create a new company
+- `PUT /api/companies/{id}` - Update a company
+- `DELETE /api/companies/{id}` - Delete a company
 
 ### Jobs
-- <code>GET /api/jobs</code> - List all jobs
-- <code>GET /api/jobs/{id}</code> - Get a single job
-- <code>POST /api/jobs</code> - Create a new job
-- <code>PUT /api/jobs/{id}</code> - Update a job
-- <code>DELETE /api/jobs/{id}</code> - Delete a job
+- `GET /api/jobs` - List all jobs
+- `GET /api/jobs/{id}` - Get a single job
+- `POST /api/jobs` - Create a new job
+- `PUT /api/jobs/{id}` - Update a job
+- `DELETE /api/jobs/{id}` - Delete a job
 
 ## 🧪 Testing
 - Run tests using:
     ```bash
     pytest -v
     ```
-- Test use an in-memory database, so they are sage to run anytime
+- Test use an in-memory database, so they are safe to run anytime
 
 ### 📝 Notes
-- <code>reset_db.py</code> deletes all existing data.
-- <code>seed_db.py</code> adds example companies and jobs.
+- `reset_db.py` deletes all existing data.
+- `seed_db.py` adds example companies and jobs.
 - FastAPI automatically generated interactive documentation at <code>/docs</code>
 
-<center> <p>Made with ❤️ by Mack</p> </center> ```
+<p align="center">Made with ❤️ by Mack</p>
