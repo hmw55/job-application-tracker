@@ -16,14 +16,8 @@ class Company(CompanyBase):
     model_config = ConfigDict(from_attributes=True)
 
 
-VALID_STATUS = [
-    "saved",
-    "applied",
-    "interview",
-    "offer",
-    "rejected",
-    "withdrawn",
-]
+# --- Jobs validation lists ---
+VALID_STATUS = ["saved", "applied", "interview", "offer", "rejected", "withdrawn"]
 
 VALID_JOB_TYPES = [
     "full_time",
@@ -37,6 +31,7 @@ VALID_JOB_TYPES = [
 ]
 
 VALID_COMP_TYPES = ["hourly", "salary"]
+
 
 # --- Jobs schemas ---
 class JobBase(BaseModel):
@@ -62,7 +57,7 @@ class JobBase(BaseModel):
 
     @field_validator("job_type")
     @classmethod
-    def valid_job_types(cls, v: Optional[str]):
+    def validate_job_type(cls, v: Optional[str]):
         if v is None:
             return v
         normalized = v.strip().lower()
@@ -72,18 +67,20 @@ class JobBase(BaseModel):
 
     @field_validator("compensation_type")
     @classmethod
-    def validate_comp_types(cls, v: Optional[str]):
+    def validate_comp_type(cls, v: Optional[str]):
         if v is None:
             return v
         normalized = v.strip().lower()
         if normalized not in VALID_COMP_TYPES:
             raise ValueError(f"Invalid compensation type: {v}")
-        return normalized 
+        return normalized
+
 
 class JobCreate(JobBase):
     pass
 
+
 class Job(JobBase):
     id: int
-
+    company: Optional[Company] = None  # nested company info for GET requests
     model_config = ConfigDict(from_attributes=True)

@@ -122,11 +122,11 @@ body {
 .list-row {
   display: grid;
   grid-template-columns: 
-    2fr 1fr 2fr 1fr 2fr 1fr 1fr 1.5fr 2fr 1fr; 
+    2fr 1fr 1.5fr 1fr 2fr 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
   align-items: center;
   gap: 10px;
   padding: 10px 15px;
-  min-width: 1000px; /* ensures horizontal scroll */
+  min-width: 1200px;
 }
 
 .list-header {
@@ -216,6 +216,52 @@ body {
   font-weight: bold;
   text-align: center;
 }
+
+/* ========= Job Form ========= */
+.job-form {
+  background-color: var(--section-bg);
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  margin-top: 15px;
+}
+
+.job-form label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.job-form .form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.job-form .input,
+.job-form .select {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  flex: 1 1 150px;
+}
+
+.job-form .readonly-input {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.job-form .button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
 
 /* ========= Responsive Adjustments ========= */
 @media (max-width: 768px) {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getCompanies } from "../api/companies";
 import { getJobs } from "../api/jobs";
+import JobForm from "../components/Job/JobForm";
 import CompanyList from "../components/Company/CompanyList";
 import JobList from "../components/Job/JobList";
 import { Sun, Moon } from "lucide-react";
@@ -12,6 +13,7 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [darkMode, setDarkMode] = useState(false);
+    const [showForm, setShowForm] = useState(false);
 
     // Fetch data from backend
     useEffect(() => {
@@ -27,8 +29,20 @@ const Dashboard = () => {
                 setLoading(false);
             }
         };
-        fetchData();
+
+            fetchData();  
     }, []);
+
+    const handleFormSuccess = async () => {
+        try {
+            const jobsData = await getJobs();
+            setJobs(jobsData);
+            setShowForm(false); // close form after success
+        } catch (err) {
+            setError(err.message || "Failed to refresh jobs");
+        }
+    };
+
 
     // Apply Theme
     useEffect(() => {
@@ -55,8 +69,21 @@ const Dashboard = () => {
          
             {/* Jobs Section */}
             <section className="dashboard-section">
-                <h2>Applications</h2>
-                {/* TODO: Add "Add Jobs" form and dropdowns for status later */}
+                <div className="section-header">
+                    <h2>Applications</h2>
+                    <button className="button" onClick={() => setShowForm(!showForm)}>
+                        {showForm ? "Close Form" : "Create New Application"}
+                    </button>                    
+                </div>
+
+                {showForm && (
+                    <JobForm
+                        companies={companies}
+                        onSuccess={handleFormSuccess}
+                        onCancel={() => setShowForm(false)}
+                    />
+                )}
+
                 <JobList jobs={jobs} companies={companies} />
             </section>
         </div>

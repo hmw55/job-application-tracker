@@ -1,10 +1,7 @@
 import React from "react";
 import JobItem from "./JobItem";
 
-const JobList = ({ jobs, companies, onEdit, onDelete }) => {
-    // Map for fast lookup
-    const companyMap = Object.fromEntries(companies.map(c => [c.id, c]));
-
+const JobList = ({ jobs, onEdit, onDelete }) => {
     return (
         <div className="list-container">
             <div className="list-header">
@@ -17,21 +14,20 @@ const JobList = ({ jobs, companies, onEdit, onDelete }) => {
                 <div>Type</div>
                 <div>Compensation</div>
                 <div>Notes</div>
+                <div>Applied Date</div>
+                <div>Last Updated</div>
                 <div>Actions</div>
             </div>
 
-            {jobs.map(job => {
-                const company = companyMap[job.company_id];
-                return (
-                    <JobItem 
-                        key={job.id} 
-                        job={job} 
-                        company={company} 
-                        onEdit={onEdit} 
-                        onDelete={onDelete} 
-                    />
-                );
-            })}
+            {jobs.map(job => (
+                <JobItem
+                    key={job.id}
+                    job={job}
+                    company={job.company} // now directly nested
+                    onEdit={onEdit}
+                    onDelete={onDelete}
+                />
+            ))}
         </div>
     );
 };

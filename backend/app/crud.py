@@ -42,7 +42,7 @@ def delete_company(db: Session, company_id: int):
 # --- Jobs CRUD ---
 def get_jobs(db: Session):
     # Get all jobs
-    return db.query(models.Job).all()
+    return db.query(models.Job).join(models.Company).all()
 
 def get_job(db: Session, job_id: int):
     # Get a single job by ID

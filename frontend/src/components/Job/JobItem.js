@@ -14,22 +14,25 @@ const JobItem = ({ job, company, onEdit, onDelete }) => {
 
     return (
         <div className="list-row">
-            <div>{company?.name || "-"}</div>
-            <div>{company?.id || "-"}</div>
-            <div>{company?.industry || "-"}</div>
+            <div>{company?.name || "—"}</div>
+            <div>{company?.id || "—"}</div>
+            <div>{company?.industry || "—"}</div>
             <div>{job.id}</div>
             <div>{job.title}</div>
+            <div><span className={`pill ${job.status}`}>{job.status}</span></div>
+            <div>{job.job_type ? job.job_type.replace("_", " ") : "—"}</div>
             <div>
-                {job.status ? <span className={`pill ${statusClass}`}>{job.status}</span> : "-"}
+            {job.compensation_type && job.compensation_amount
+                ? job.compensation_type === "salary"
+                ? `$${job.compensation_amount.toLocaleString()}/yr`
+                : `$${job.compensation_amount.toLocaleString()}/hr`
+                : "—"}
             </div>
+            <div>{job.notes || "—"}</div>
+            <div>{job.applied_date || "—"}</div>
+            <div>{job.last_updated || "—"}</div>
             <div>
-                {job.job_type ? <span className={`pill ${typeClass}`}>{job.job_type.replace("_"," ")}</span> : "-"}
-            </div>
-            <div>{compensation}</div>
-            <div>{job.notes || "-"}</div>
-            <div>
-                <button className="button" onClick={() => onEdit(job)}>Edit</button>
-                <button className="button" onClick={() => onDelete(job.id)} style={{marginLeft:"5px"}}>Delete</button>
+            <button className="button" onClick={() => onEdit(job)}>Edit</button>
             </div>
         </div>
     );
