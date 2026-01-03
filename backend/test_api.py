@@ -93,11 +93,14 @@ def test_update_job(test_client):
     # Create a job
     job_data = {
         "company_id": company_id,
-        "title": "OldTitle",
-        "status": "Applied",
+        "title": "Engineer Intern",
+        "status": "applied",
+        "job_type": "internship",
+        "compensation_type": "hourly",
+        "amount": 25,
         "applied_date": "2026-01-01",
         "last_updated": "2026-01-01",
-        "notes": "Old notes"
+        "notes": "Test notes"
     }
     job_resp = test_client.post("/api/jobs", json=job_data)
     job_id = job_resp.json()["id"]
@@ -105,8 +108,11 @@ def test_update_job(test_client):
     # Update
     update_data = {
         "company_id": company_id,
-        "title": "NewTitle",
+        "title": "Engineer Intern Updated",
         "status": "interview",
+        "job_type": "internship",
+        "compensation_type": "hourly",
+        "amount": 30,
         "applied_date": "2026-01-02",
         "last_updated": "2026-01-03",
         "notes": "Updated notes"
