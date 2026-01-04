@@ -29,6 +29,7 @@ Click each section to expand and see the full set of images in both light and da
     <summary style="font-size:18px; font-weight:bold;">📊 Dashboard Screenshots</summary>
 
 ### Dashboard
+
 **Seeded Data - Dark Mode**
 ![Seeded Dashboard Dark](screenshots/dark-seeded-dashboard.png)
 
@@ -47,6 +48,8 @@ Click each section to expand and see the full set of images in both light and da
     <summary style="font-size:18px; font-weight:bold;">🖼️ Modal Screenshots</summary>
 
 ### Modals
+
+*NOTE:* The "Job Type" dropdown previously displayed values in all caps (e.g., FULL TIME). It has been updated to display in title case (e.g., Full Time, Part Time) for improved readability.
 
 **Create New Application Modal - Dark (Empty)**
 ![New Application Modal Dark Empty](screenshots/dark-new-application-modal-empty.png)
