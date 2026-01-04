@@ -6,6 +6,14 @@ const STATUS_OPTIONS = ["saved", "applied", "interview", "offer", "rejected", "w
 const JOB_TYPE_OPTIONS = ["full_time", "part_time", "internship", "contract", "temporary", "remote", "hybrid", "on_site"];
 const COMP_TYPE_OPTIONS = ["salary", "hourly"];
 
+const formatJobType = (type) => {
+    return type
+        .toLowerCase()
+        .split("_")
+        .map(word => word[0].toUpperCase() + word.slice(1))
+        .join(" ");
+}
+
 const JobForm = ({ job = null, onSuccess, onCancel }) => {
     const [formData, setFormData] = useState({
         company_name: job?.company?.name || "",
@@ -100,8 +108,10 @@ const JobForm = ({ job = null, onSuccess, onCancel }) => {
                         </select>
 
                         <select name="job_type" value={formData.job_type} onChange={handleChange} className="select">
-                            <option value="">Select Type</option>
-                            {JOB_TYPE_OPTIONS.map(t => <option key={t} value={t}>{t.replace("_", " ").toUpperCase()}</option>)}
+                        <option value="">Select Type</option>
+                        {JOB_TYPE_OPTIONS.map(t => (
+                            <option key={t} value={t}>{formatJobType(t)}</option>
+                        ))}
                         </select>
 
                         <select name="compensation_type" value={formData.compensation_type} onChange={handleChange} className="select">
