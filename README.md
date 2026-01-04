@@ -19,6 +19,40 @@
 
 ---
 
+## 📸 Screenshots
+
+### Dashboard
+**Seeded Data - Dark Mode**
+![Seeded Dashboard Dark](screenshots/dark-seeded-dashboard.png)
+
+**Seeded Data - Light Mode**
+![Seeded Dashboard Light](screenshots/light-seeded-dashboard.png)
+
+**Custom/New Application - Dark Mode**
+![Dashboard with New Application Dark](screenshots/dark-dashboard-w-new-application.png)
+
+**Custom/New Application (with hover tooltip on long note) - Light Mode**
+![Dashboard with New Application Light](screenshots/light-dashboard-with-new-application-and-tooltip-box.png)
+
+---
+
+### Modals
+
+**Create New Application Modal - Dark (Empty)**
+![New Application Modal Dark Empty](screenshots/dark-new-application-modal-empty.png)
+
+**Create New Application Modal - Dark (Filled)**
+![New Application Modal Dark Filled](screenshots/dark-new-application-modal-filled.png)
+
+**Create New Application Modal - Light (Filled)**
+![New Application Modal Light Filled](screenshots/light-new-application-modal-filled.png)
+
+**Edit Application Modal - Dark**
+![Edit Application Modal Dark](screenshots/dark-edit-application-modal.png)
+
+**Edit Application Modal - Light**
+![Edit Application Modal Light](screenshots/light-edit-application-modal.png)
+
 ## 🗂 Project Structure
 - `backend/` — The API and database logic (FastAPI + SQLite)
 - `frontend/` — UI code (React)
