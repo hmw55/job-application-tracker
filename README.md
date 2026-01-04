@@ -21,6 +21,13 @@
 
 ## 📸 Screenshots
 
+Below are screenshots demonstrating the main features of the Job/Internship Application Tracker.
+You can view the dashboard with the seeded and custom data, as well as the various modals for creating and editing applications.
+Click each section to expand and see the full set of images in both light and dark modes.
+
+<details>
+    <summary style="font-size:18px; font-weight:bold;">📊 Dashboard Screenshots</summary>
+
 ### Dashboard
 **Seeded Data - Dark Mode**
 ![Seeded Dashboard Dark](screenshots/dark-seeded-dashboard.png)
@@ -34,7 +41,10 @@
 **Custom/New Application (with hover tooltip on long note) - Light Mode**
 ![Dashboard with New Application Light](screenshots/light-dashboard-with-new-application-and-tooltip-box.png)
 
----
+</details>
+
+<details>
+    <summary style="font-size:18px; font-weight:bold;">🖼️ Modal Screenshots</summary>
 
 ### Modals
 
@@ -52,6 +62,8 @@
 
 **Edit Application Modal - Light**
 ![Edit Application Modal Light](screenshots/light-edit-application-modal.png)
+
+</details>
 
 ## 🗂 Project Structure
 - `backend/` — The API and database logic (FastAPI + SQLite)
